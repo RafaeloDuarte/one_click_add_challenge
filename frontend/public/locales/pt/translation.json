@@ -1,10 +1,45 @@
 {
   "register": {
-    "title": "Cadastro",
-    "alreadyHaveAccount": "Já tem uma conta? Entrar"
+    "title": "Registrar",
+    "username": "Nome de usuário",
+    "username_placeholder": "Digite seu nome de usuário",
+    "email": "Email",
+    "email_placeholder": "Digite seu email",
+    "password": "Senha",
+    "password_placeholder": "Digite sua senha",
+    "confirm_password": "Confirmar Senha",
+    "confirm_password_placeholder": "Confirme sua senha",
+    "submit": "Registrar",
+    "already_have_account": "Já tem uma conta? Entrar",
+    "success_message": "Registro bem-sucedido!",
+    "error_message": "Falha no registro: {{errorMessage}}",
+    "unknown_error": "Ocorreu um erro desconhecido",
+    "username_required": "Nome de usuário é obrigatório",
+    "invalid_email": "Endereço de email inválido",
+    "email_required": "Email é obrigatório",
+    "password_min": "A senha deve ter pelo menos 6 caracteres",
+    "password_required": "Senha é obrigatória",
+    "passwords_must_match": "As senhas devem coincidir",
+    "confirm_password_required": "Confirmar senha é obrigatório"
   },
   "login": {
     "title": "Entrar",
-    "noAccount": "Não tem uma conta? Cadastre-se"
+    "email_label": "Email",
+    "email_placeholder": "Digite seu email",
+    "password_label": "Senha",
+    "password_placeholder": "Digite sua senha",
+    "submit_button": "Entrar",
+    "forgot_password": "Esqueceu a senha?",
+    "no_account": "Não tem uma conta? Registrar",
+    "success_message": "Login bem-sucedido!",
+    "error_message": "Falha no login: {{errorMessage}}",
+    "unknown_error": "Ocorreu um erro desconhecido",
+    "username_required": "Nome de usuário é obrigatório",
+    "invalid_email": "Endereço de email inválido",
+    "email_required": "Email é obrigatório",
+    "password_min": "A senha deve ter pelo menos 6 caracteres",
+    "password_required": "Senha é obrigatória",
+    "passwords_must_match": "As senhas devem coincidir",
+    "confirm_password_required": "Confirmar senha é obrigatório"
   }
 }
