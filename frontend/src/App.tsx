@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <Router>
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand as={Link} to="/">Voting App</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/voting">Voting App</Navbar.Brand>
             <Nav className="ms-auto">
               <Nav className="ms-auto">
                 {isAuthenticated ? (
@@ -35,6 +35,7 @@ const App: React.FC = () => {
         <Container className="mt-4">
           <Routes>
             <Route path="/" element={<VotingPage />} />
+            <Route path="/voting" element={<VotingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>

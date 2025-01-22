@@ -1,59 +1,63 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Form, Container, Row, Col, Alert } from "react-bootstrap";
-import { useFormik } from "formik";
-import { toast, ToastContainer } from "react-toastify";
+import { Form, Button, Container } from "react-bootstrap";
+import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../components/SwitchLanguage";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import { toggleLanguage } from "../store/slices/languageSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import "react-toastify/dist/ReactToastify.css";
+import { withAuthVoting } from "../hoc/withAuthVoting";
 import { useAuth } from "../context/AuthContext";
 import { loginUser } from "../services/user";
 
+interface LoginFormValues {
+  email: string;
+  password: string;
+  lng: string
+}
+
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const language = useAppSelector((state: any) => state.language.language);
   const dispatch = useAppDispatch();
   const { login } = useAuth();
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: ""
-    },
-    validationSchema: Yup.object({
-      username: Yup.string().required(t("login.username_required")),
-      email: Yup.string().email(t("login.invalid_email")).required(t("login.email_required")),
-      password: Yup.string().min(6, t("login.password_min")).required(t("login.password_required")),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), undefined], t("login.passwords_must_match"))
-        .required(t("login.confirm_password_required")),
-    }),
-    onSubmit: async (values) => {
-      try {
-        const data = await loginUser({
-          email: values.email,
-          password: values.password,
-          lng: i18n.language
-        });
-        const { token } = data;
+  const initialValues: LoginFormValues = { email: "", password: "", lng: i18n.language };
 
-        login(token);
-
-        toast.success(t("login.success_message"), {
-          position: "top-right",
-          autoClose: 3000,
-        });
-
-        navigate("/");
-      } catch (error: any) {
-        const errorMessage = error?.response?.data?.error || t("login.unknown_error");
-        alert(t("login.error_message", { errorMessage }));
-      }
-    }
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email(t("login.validation.email.not_valid"))
+      .required(t("login.validation.email.required")),
+    password: Yup.string()
+      .min(6, t("login.validation.password.required"))
+      .required(t("login.validation.password.required")),
   });
+
+  const handleSubmit = async (
+    values: LoginFormValues,
+    { setSubmitting, resetForm }: FormikHelpers<LoginFormValues>
+  ) => {
+    setSubmitting(true);
+    try {
+      const { token } = await loginUser(values);
+
+      login(token);
+      toast.success(t("login.success_message"), { autoClose: 3000 });
+
+      navigate("/");
+
+      resetForm();
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.error || "login.unknown_error";
+      toast.error(errorMessage, { autoClose: 3000 });
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const handleToggleLanguage = () => {
     dispatch(toggleLanguage());
@@ -64,44 +68,54 @@ const LoginPage: React.FC = () => {
     <Container className="mt-5">
       <ToastContainer />
       <LanguageSwitcher toggleLanguage={handleToggleLanguage} />
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <h2>{t("login.title")}</h2>
-          <Form onSubmit={formik.handleSubmit}>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>{t("login.email_label")}</Form.Label>
-              <Form.Control
+      <h2>{t("login.title")}</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleSubmit, isSubmitting }) => (
+          <Form onSubmit={handleSubmit} noValidate>
+            <Form.Group controlId="email" className="mb-3">
+              <Form.Label>{t("login.email")}</Form.Label>
+              <Field
+                name="email"
                 type="email"
+                as={Form.Control}
                 placeholder={t("login.email_placeholder")}
-                {...formik.getFieldProps("email")}
               />
-              {formik.touched.email && formik.errors.email && (
-                <Alert variant="danger">{formik.errors.email}</Alert>
-              )}
+              <ErrorMessage
+                name="email"
+                component={Form.Text}
+                className="text-danger"
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>{t("login.password_label")}</Form.Label>
-              <Form.Control
+            <Form.Group controlId="password" className="mb-3">
+              <Form.Label>{t("login.password")}</Form.Label>
+              <Field
+                name="password"
                 type="password"
+                as={Form.Control}
                 placeholder={t("login.password_placeholder")}
-                {...formik.getFieldProps("password")}
               />
-              {formik.touched.password && formik.errors.password && (
-                <Alert variant="danger">{formik.errors.password}</Alert>
-              )}
+              <ErrorMessage
+                name="password"
+                component={Form.Text}
+                className="text-danger"
+              />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-              {t("login.submit_button")}
+            <Button type="submit" variant="primary" disabled={isSubmitting}>
+              {isSubmitting ? t("login.submitting_button") : t("login.submit_button")}
             </Button>
             <br />
             <Link to="/register">{t("login.no_account")}</Link>
           </Form>
-        </Col>
-      </Row>
+        )}
+      </Formik>
     </Container>
   );
 };
 
-export default LoginPage;
+export default withAuthVoting(LoginPage);

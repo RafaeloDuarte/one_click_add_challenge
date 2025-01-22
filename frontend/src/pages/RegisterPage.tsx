@@ -49,10 +49,10 @@ const RegisterPage: React.FC = () => {
           autoClose: 3000,
         });
 
-        navigate("/");
+        navigate("/voting");
       } catch (error: any) {
-        const errorMessage = error?.response?.data?.error || t("register.unknown_error");
-        alert(t("register.error_message", { errorMessage }));
+        const errorMessage = error?.response?.data?.error || "login.unknown_error";
+        toast.error(errorMessage, { autoClose: 3000 });
       }
     }
   });
