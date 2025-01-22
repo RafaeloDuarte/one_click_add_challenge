@@ -1,0 +1,10 @@
+{
+  "register": {
+    "title": "Cadastro",
+    "alreadyHaveAccount": "Já tem uma conta? Entrar"
+  },
+  "login": {
+    "title": "Entrar",
+    "noAccount": "Não tem uma conta? Cadastre-se"
+  }
+}

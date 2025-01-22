@@ -1,0 +1,10 @@
+{
+  "register": {
+    "title": "Register",
+    "alreadyHaveAccount": "Already have an account? Login"
+  },
+  "login": {
+    "title": "Login",
+    "noAccount": "Don't have an account? Register"
+  }
+}
