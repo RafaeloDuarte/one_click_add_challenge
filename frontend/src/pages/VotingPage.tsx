@@ -32,7 +32,7 @@ const VotingPage: React.FC = () => {
         const data = await getVideos();
         setVideos(data);
       } catch (err) {
-        setError(t('error_loading_videos') || 'Error loading videos.');
+        setError(t('voting.error_loading_videos') || 'Error loading videos.');
       } finally {
         setLoading(false);
       }
@@ -53,7 +53,7 @@ const VotingPage: React.FC = () => {
         await updateVideoVotes(videoId, newVideos[videoIndex].votes);
       }
     } catch (err) {
-      setError(t('error_voting') || 'Error voting.');
+      setError(t('voting.error_voting') || 'Error voting.');
     }
   };
 
@@ -65,15 +65,15 @@ const VotingPage: React.FC = () => {
   // Ordenação dos videos
   const sortedVideos = [...videos].sort((a, b) => b.votes - a.votes);
 
-  if (loading) return <div>{t('loading')}...</div>;
+  if (loading) return <div>{t('voting.loading')}...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <Container className="mt-5">
       <LanguageSwitcher toggleLanguage={handleToggleLanguage} />
-      <h2>{t('vote_for_video')}</h2>
+      <h2>{t('voting.vote_for_video')}</h2>
       <Row className="mb-4">
-        {videos.map((video) => (
+        {videos?.map((video) => (
           <Col key={video.id} sm={12} md={6} className="mb-3">
             <Card>
               <Card.Body>
@@ -86,7 +86,7 @@ const VotingPage: React.FC = () => {
                   style={{ marginBottom: "15px" }}
                 />
                 <Button variant="primary" onClick={() => handleVote(video.id)}>
-                  {t('vote')}
+                  {t('voting.vote')}
                 </Button>
               </Card.Body>
             </Card>
@@ -94,14 +94,14 @@ const VotingPage: React.FC = () => {
         ))}
       </Row>
 
-      <h3>{t('video_ranking')}</h3>
+      <h3>{t('voting.video_ranking')}</h3>
       <ListGroup>
-        {sortedVideos.map((video, index) => (
+        {sortedVideos?.map((video, index) => (
           <ListGroup.Item key={video.id}>
             <span>
               {index + 1}. {video.title}
             </span>{' '}
-            - <strong>{video.votes} {t('votes')}</strong>
+            - <strong>{video.votes} {t('voting.votes')}</strong>
           </ListGroup.Item>
         ))}
       </ListGroup>

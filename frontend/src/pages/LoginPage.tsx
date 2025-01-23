@@ -30,11 +30,11 @@ const LoginPage: React.FC = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email(t("login.validation.email.not_valid"))
-      .required(t("login.validation.email.required")),
+      .email(t("login.invalid_email"))
+      .required(t("login.email_required")),
     password: Yup.string()
-      .min(6, t("login.validation.password.required"))
-      .required(t("login.validation.password.required")),
+      .min(6, t("login.password_min"))
+      .required(t("login.password_required")),
   });
 
   const handleSubmit = async (

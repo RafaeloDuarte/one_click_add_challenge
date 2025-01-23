@@ -42,5 +42,12 @@
     "password_required": "Senha é obrigatória",
     "passwords_must_match": "As senhas devem coincidir",
     "confirm_password_required": "Confirmar senha é obrigatório"
+  },
+  "voting": {
+    "loading": "Carregando",
+    "error_loading_videos": "Erro ao carregar vídeos",
+    "vote_for_video": "Vote no Vídeo",
+    "vote": "Votar",
+    "video_ranking": "Ranking de Vídeos"
   }
 }

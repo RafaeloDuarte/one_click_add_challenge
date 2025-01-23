@@ -42,5 +42,12 @@
     "password_required": "Password is required",
     "passwords_must_match": "Passwords must match",
     "confirm_password_required": "Confirm password is required"
+  },
+  "voting": {
+    "loading": "Loading",
+    "error_loading_videos": "Error loading videos",
+    "vote_for_video": "Vote for Video",
+    "vote": "Vote",
+    "video_ranking": "Video Ranking"
   }
 }
