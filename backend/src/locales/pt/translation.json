@@ -1,0 +1,21 @@
+{
+  "error": {
+    "emailAlreadyRegistered": "E-mail já cadastrado",
+    "jwtSecretUndefined": "Chave secreta não definida! Defina a variável JWT_SECRET",
+    "internalServerError": "Erro interno no servidor",
+    "invalidCredentials": "Credenciais inválidas",
+    "invalidToken": "Token inválido",
+    "missingToken": "Token não informado",
+    "noTokenProvided": "Nenhum token fornecido",
+    "notFound": "Não encontrado",
+    "passwordIncorrect": "Senha incorreta",
+    "passwordRequired": "Senha é obrigatória",
+    "unauthorized": "Não autorizado",
+    "userNotFound": "Usuário não encontrado",
+    "usernameAlreadyRegistered": "Nome de usuário já cadastrado",
+    "usernameRequired": "Nome de usuário é obrigatório",
+    "unknown_error": "Erro desconhecido"
+  },
+  "registrationError": "Erro no registro:",
+  "registrationSuccess": "Registrado com sucesso!"
+}

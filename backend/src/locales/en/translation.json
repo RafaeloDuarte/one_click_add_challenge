@@ -1,0 +1,10 @@
+{
+  "error": {
+    "emailAlreadyRegistered": "Email already registered",
+    "jwtSecretUndefined": "JWT secret not defined! Define the JWT_SECRET variable",
+    "internalServerError": "Internal server error",
+    "invalidCredentials": "Invalid credentials",
+    "unknown_error": "Unknown error"
+  },
+  "registrationError": "Registration error:"
+}
