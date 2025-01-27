@@ -48,6 +48,7 @@
     "error_loading_videos": "Error loading videos",
     "vote_for_video": "Vote for Video",
     "vote": "Vote",
-    "video_ranking": "Video Ranking"
+    "video_ranking": "Video Ranking",
+    "votes": "Votes"
   }
 }
