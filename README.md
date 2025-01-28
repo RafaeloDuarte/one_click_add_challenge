@@ -1,7 +1,3 @@
-Aqui está um modelo de README para o seu projeto:
-
----
-
 # **YouTube Video Voting App**
 
 Este é um projeto simples desenvolvido com **Node.js** no backend e **React** com **Vite** no frontend. Ele permite que os usuários façam login (autenticação JWT) e participem de uma votação entre dois vídeos do YouTube.
