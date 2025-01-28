@@ -69,6 +69,7 @@ const LoginPage: React.FC = () => {
       <ToastContainer />
       <LanguageSwitcher toggleLanguage={handleToggleLanguage} />
       <h2>{t("login.title")}</h2>
+      <h2>Mudança para testar CI</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
