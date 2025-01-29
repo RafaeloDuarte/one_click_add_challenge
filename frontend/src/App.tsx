@@ -9,7 +9,7 @@ import VotingPage from './pages/VotingPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import { store } from "./store";
-import { useAuth } from './context/AuthContext';
+import { useAuth } from './context/AuthProvider';
 
 const App: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();

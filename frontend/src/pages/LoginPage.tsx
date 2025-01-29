@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 import { toggleLanguage } from "../store/slices/languageSlice";
 import "react-toastify/dist/ReactToastify.css";
 import { withAuthVoting } from "../hoc/withAuthVoting";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthProvider";
 import { loginUser } from "../services/user";
 
 interface LoginFormValues {
@@ -69,6 +69,7 @@ const LoginPage: React.FC = () => {
       <ToastContainer />
       <LanguageSwitcher toggleLanguage={handleToggleLanguage} />
       <h2>{t("login.title")}</h2>
+      <h2>Mudança para testar CI</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -118,4 +119,5 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default withAuthVoting(LoginPage);
+const LoginPageWithAuth = withAuthVoting(LoginPage);
+export default LoginPageWithAuth;
