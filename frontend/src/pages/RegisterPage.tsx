@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../components/SwitchLanguage";
 import { toggleLanguage } from "../store/slices/languageSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthProvider";
 import { registerUser } from "../services/user";
 
 const RegisterPage: React.FC = () => {

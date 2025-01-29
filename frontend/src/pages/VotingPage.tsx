@@ -32,6 +32,7 @@ const VotingPage: React.FC = () => {
         const data = await getVideos();
         setVideos(data);
       } catch (err) {
+        console.log(err);
         setError(t('voting.error_loading_videos') || 'Error loading videos.');
       } finally {
         setLoading(false);
@@ -53,6 +54,7 @@ const VotingPage: React.FC = () => {
         await updateVideoVotes(videoId, newVideos[videoIndex].votes);
       }
     } catch (err) {
+      console.log(err);
       setError(t('voting.error_voting') || 'Error voting.');
     }
   };
@@ -109,4 +111,5 @@ const VotingPage: React.FC = () => {
   );
 };
 
-export default withAuthLogin(VotingPage);
+const VotingPageWithAuth = withAuthLogin(VotingPage);
+export default VotingPageWithAuth;
