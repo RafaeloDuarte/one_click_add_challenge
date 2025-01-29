@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 import ReactPlayer from "react-player";
-import { withAuthLogin } from '../hoc/withAuthLogin';
 import { useTranslation } from 'react-i18next';
 import { getVideos, updateVideoVotes } from '../services/videos';
 import LanguageSwitcher from '../components/SwitchLanguage';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { toggleLanguage } from '../store/slices/languageSlice';
+import { useAuth } from '../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 // Tipos de votos
 interface VideoVote {
@@ -19,7 +20,13 @@ interface VideoVote {
 const VotingPage: React.FC = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const language = useAppSelector((state: any) => state.language.language);
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    navigate("/login");
+  }
 
   const [videos, setVideos] = useState<VideoVote[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -109,4 +116,4 @@ const VotingPage: React.FC = () => {
   );
 };
 
-export default withAuthLogin(VotingPage);
+export default VotingPage;

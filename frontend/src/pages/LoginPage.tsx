@@ -9,8 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { toggleLanguage } from "../store/slices/languageSlice";
 import "react-toastify/dist/ReactToastify.css";
-import { withAuthVoting } from "../hoc/withAuthVoting";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthProvider";
 import { loginUser } from "../services/user";
 
 interface LoginFormValues {
@@ -24,7 +23,11 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const language = useAppSelector((state: any) => state.language.language);
   const dispatch = useAppDispatch();
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    navigate("/voting");
+  }
 
   const initialValues: LoginFormValues = { email: "", password: "", lng: i18n.language };
 
@@ -118,4 +121,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default withAuthVoting(LoginPage);
+export default LoginPage;
